@@ -1,0 +1,29 @@
+{
+  "name": "bootdex",
+  "version": "1.0.0",
+  "description": "A simple cli app made for boot.dev.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/main.js",
+    "dev": "npx tsc && node dist/main.js",
+    "test": "vitest --run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylerShetrompf/bootdex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TylerShetrompf/bootdex/issues"
+  },
+  "homepage": "https://github.com/TylerShetrompf/bootdex#readme",
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
+}
