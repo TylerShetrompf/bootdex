@@ -1,6 +1,6 @@
 import { createInterface } from "node:readline";
-import { stdin, stdout } from "node:process";
 import { getCommands } from "./commands.js";
+import { type State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
 
@@ -19,45 +19,38 @@ export function cleanInput(input: string): string[] {
 
 }
 
-export function startREPL() {
+export function startREPL(state: State) {
 
-    const shell = createInterface({
-        input: stdin,
-        output: stdout,
-        prompt: "Bootdex > ",
-    })
+    state.shell.prompt();
 
-    shell.prompt();
-
-    shell.on("line", async (input) =>{
+    state.shell.on("line", async (input) =>{
         
         if (input === ""){
             console.log("Please input a command.");
-            shell.prompt();
+            state.shell.prompt();
         }
 
         const cleaned = cleanInput(input);
         
         const commandName = cleaned[0];
 
-        const commands = getCommands();
         
-        const cmd = commands[commandName];
+        const cmd = state.commands[commandName];
 
         if (!cmd) {
-            console.log();
-            shell.prompt();
+            console.log("Please enter a command.");
+            state.shell.prompt();
             return;
         } else {
             try {
-                cmd.callback(commands);    
+                cmd.callback(state);    
             } catch (error) {
                 console.log(error);
             }
             
         }
 
-        shell.prompt();
+        state.shell.prompt();
 
     })
 
