@@ -14,5 +14,15 @@ export function getCommands(): Record<string, CLICommand> {
             description: "Exits the pokedex",
             callback: commandExit,
         },
+        map: {
+            name: "map",
+            description: "Get the next page of locations"
+            callback: commandMapForward,
+        },
+        mapb: {
+            name: "mapb",
+            description: "Get the previous page of locations"
+            callback: commandMapBack,
+        }
     }
 }
