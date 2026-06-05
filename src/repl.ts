@@ -19,7 +19,7 @@ export function cleanInput(input: string): string[] {
 
 }
 
-export function startREPL(state: State) {
+export async function startREPL(state: State) {
 
     state.shell.prompt();
 
@@ -43,9 +43,9 @@ export function startREPL(state: State) {
             return;
         } else {
             try {
-                cmd.callback(state);    
+                await cmd.callback(state);    
             } catch (error) {
-                console.log(error);
+                console.log((error as Error).message);
             }
             
         }
