@@ -1,5 +1,3 @@
-import { createInterface } from "node:readline";
-import { getCommands } from "./commands.js";
 import { type State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
@@ -31,7 +29,7 @@ export async function startREPL(state: State) {
         }
 
         const cleaned = cleanInput(input);
-        
+        const args = cleaned.slice(1);
         const commandName = cleaned[0];
 
         
@@ -43,7 +41,7 @@ export async function startREPL(state: State) {
             return;
         } else {
             try {
-                await cmd.callback(state);    
+                await cmd.callback(state, ...args);    
             } catch (error) {
                 console.log((error as Error).message);
             }
